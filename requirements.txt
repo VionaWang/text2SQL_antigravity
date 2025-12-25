@@ -1,0 +1,10 @@
+langgraph
+langchain
+langchain-google-vertexai
+google-cloud-bigquery
+db-dtypes
+pydantic
+python-dotenv
+pandas
+numpy
+regex
