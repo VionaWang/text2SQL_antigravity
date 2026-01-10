@@ -25,7 +25,8 @@ def main():
                 "user_query": user_input,
                 "messages": [("user", user_input)],
                 "retry_count": 0,
-                "error": None
+                "error": None,
+                "query_result": []
             }
             
             final_response = ""
@@ -33,6 +34,9 @@ def main():
             
             for event in graph.stream(initial_state):
                 for node_name, state_update in event.items():
+                    if state_update is None:
+                        continue
+                        
                     if args.verbose:
                         print(f"\n\n[Node: {node_name}]")
                         if "candidate_sql" in state_update:
@@ -49,6 +53,8 @@ def main():
         except KeyboardInterrupt:
             break
         except Exception as e:
+            import traceback
+            traceback.print_exc()
             print(f"\nError: {e}")
 
 if __name__ == "__main__":

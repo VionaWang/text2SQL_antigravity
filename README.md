@@ -52,6 +52,20 @@ A "Practical MVP" agentic chatbot that converts natural language questions into 
 
 ## 🏃 Usage
 
+### Web Interface (Streamlit) - Recommended ✨
+Run the Streamlit web app for a modern, interactive UI:
+```bash
+streamlit run streamlit_app.py
+```
+
+The web interface provides:
+- 💬 **Chat Interface**: Interactive conversation with the agent
+- 📊 **Query History**: View and search past queries
+- 📚 **Training Data Management**: Add, view, and delete training examples
+- 🗂️ **Schema Browser**: Explore database tables and relationships
+
+The app will open automatically in your browser at `http://localhost:8501`
+
 ### Interactive Chat (CLI)
 Run the main script to start a conversation loop:
 ```bash
@@ -71,7 +85,12 @@ python check_models.py
 ```
 
 ## 🧠 Memory Bank
-The agent "learns" by saving successful queries to `training_data.jsonl`. This file serves as a persistent store of few-shot examples. You can manually edit this file to add curated examples to improve performance.
+The agent "learns" by saving successful queries to a **SQLite database** (`text2sql.db`). This database stores:
+- **Training Examples**: Few-shot examples that improve query generation
+- **Schema Cache**: Cached BigQuery schema information for faster lookups
+- **Query History**: Complete history of all queries and their results
+
+The system automatically migrates data from legacy JSON/JSONL files on first run. You can manage training examples through the Streamlit web interface or by directly accessing the database.
 
 ## 🛡️ License
 [MIT](LICENSE)

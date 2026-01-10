@@ -6,10 +6,12 @@ class AgentState(TypedDict):
     # Context
     user_query: str
     relevant_schema: str
+    conversation_history: List[Dict[str, str]]  # Previous Q&A pairs for context
     
     # SQL Generation & execution
     candidate_sql: str
     query_result: List[Dict[str, Any]]
+    previous_sql: Optional[str]  # SQL from previous turn for reference
     
     # Error Handling & Feedback Loop
     error: Optional[str]
